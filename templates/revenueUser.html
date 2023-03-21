@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+	<style>
+		table {
+			width: 100%;
+			margin-bottom: 1rem;
+			color: #212529;
+			background-color: transparent;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		
+		table th,
+		table td {
+			padding: 0.75rem;
+			vertical-align: top;
+			border-top: 1px solid #dee2e6;
+		}
+		
+		table thead th {
+			vertical-align: bottom;
+			border-bottom: 2px solid #dee2e6;
+		}
+		
+		table tbody + tbody {
+			border-top: 2px solid #dee2e6;
+		}
+		
+		thead {
+			background-color: #f2f2f2;
+		}
+		
+		thead th {
+			font-weight: 700;
+		}
+		
+		.table-striped tbody tr:nth-of-type(odd) {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+		.custom-box {
+			background-color: #f1c40f;
+			border: 2px solid #e67e22;
+			padding: 10px;
+			font-family: Arial, sans-serif;
+			font-size: 24px;
+			font-weight: bold;
+			color: #fff;
+		}
+	</style>
+	<div class="container">
+		<h1>REVENUS</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Montant</th>
+					<th>Date</th>
+					<th>Categorie</th>
+					<th>supprimer</th>
+					<th>modifier</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for revenue in revenue %}
+				<tr>
+					<td>{{ revenue.name }}</td>
+					<td>{{ revenue.montant }} CFA </td>
+					<td>{{ revenue.date_AJOUT }}</td>
+					<td>{{revenue.categorie}}</td>
+					<td>
+						<a href="{% url 'deleteR' revenue.id  %}" class="btn btn-danger btn-lg btn-block rounded-pill">supprimer</a>
+						
+					</td>
+					<td>
+						<a href="{% url 'updateR' revenue.id %}" class="btn btn-success btn-lg btn-block rounded-pill">Modifier</a>
+
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="custom-box">
+			<h2>Total: {{ gap }} cfa</h2>
+		  </div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}

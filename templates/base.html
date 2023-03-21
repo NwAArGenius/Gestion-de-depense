@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon site</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <style>
+    /* Styles pour le navbar */
+    .navbar {
+      background-color: #333;
+      border-radius: 0;
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .navbar-form {
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-control {
+      margin-right: 5px;
+      width: 200px;
+    }
+
+    .btn-outline-success {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* Styles pour la navigation verticale */
+    .nav-pills {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .nav-link {
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-link.active {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Styles pour le contenu de la page */
+    .container {
+      margin-top: 20px;
+    }
+  </style>
+  {{ graph_html|safe }}
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">GESTION DE BUDGET PERSO</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'home'%}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'createDepense' %}"> ENRIGISTRER  UNE DEPENSES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'depenseUser' %}">MES DEPENSES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'createRevenue' %}">ENRIGISTRER  UNE REVENUE" </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'revenueUser' %}">MES REVENUES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'gap' %}">VOIR L'ECART</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="col-md-9">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZ" >
+</body>
+</html>
+
