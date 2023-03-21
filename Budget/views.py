@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Depense, Revenue
 import plotly.graph_objs as go
@@ -105,6 +106,7 @@ def deleteReveneu(request, id):
     
 
 def gap_view(request):
+    user = request.user
     depenses = Depense.objects.all()
     revenues = Revenue.objects.all()
     depense_total = sum([e.montant for e in depenses])
