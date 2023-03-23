@@ -82,7 +82,7 @@ def ReadRevenue(request):
         revenue_total = sum([i.montant for i in revenue])
         gap = revenue_total 
         context = {"revenue": revenue, "gap": gap}
-        return render(request, "RevenueUser.html", context)
+        return render(request, "revenueUser.html", context)
     except Revenue.DoesNotExist:
         raise Http404("accun Revenue")
     
